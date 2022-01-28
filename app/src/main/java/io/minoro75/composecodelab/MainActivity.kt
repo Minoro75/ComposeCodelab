@@ -3,6 +3,8 @@ package io.minoro75.composecodelab
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
@@ -25,23 +27,29 @@ class MainActivity : ComponentActivity() {
 }
 
 @Composable
-private fun MyApp() {
-    Surface(color = MaterialTheme.colors.surface) {
-        Greeting(name = "Android")
+private fun MyApp(names : List<String> = listOf("Android", "Compose","World") ) {
+    Column(modifier = Modifier.padding(vertical = 4.dp)) {
+        for (name in names){
+            Greeting(name = name)
+        }
     }
 }
 
 @Composable
-fun Greeting(name: String) {
-    Surface(color = MaterialTheme.colors.surface) {
-        Text(text = "Hello $name!", modifier = Modifier.padding(24.dp))
+fun Greeting(name: String, ) {
+    Surface(color = MaterialTheme.colors.primary,
+    modifier = Modifier.padding(vertical = 4.dp, horizontal = 8.dp)) {
+        Column(modifier = Modifier.padding(24.dp).fillMaxWidth()) {
+            Text(text = "Hello,")
+            Text(text = name)
+        }
     }
 }
 
-@Preview(showBackground = true)
+@Preview(showBackground = true, widthDp = 320)
 @Composable
 fun DefaultPreview() {
     ComposeCodelabTheme {
-        Greeting("Android")
+        MyApp()
     }
 }
